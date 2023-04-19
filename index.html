@@ -39,6 +39,7 @@
       }
 
       function calculate() {
+        // eval should be the same as Function("return " + str)
         const calculation = " = " + Function("return " + str).call();
         visualize(calculation);
       }
