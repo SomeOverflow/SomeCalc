@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SomeCalculator</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/rippleui@1.11.0/dist/css/styles.css"
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <script>
+      var str = "0";
+
+      function formatCalculation() {
+        var res = str;
+
+        res = res.replaceAll("+", " + ");
+        res = res.replaceAll("-", " - ");
+        res = res.replaceAll("*", " * ");
+        res = res.replaceAll("/", " / ");
+
+        return res;
+      }
+
+      function reset() {
+        str = "0";
+        visualize("reset");
+      }
+
+      function addToString(add) {
+        str = str + add;
+        visualize(null);
+      }
+
+      function calculate() {
+        const calculation = " = " + Function("return " + str).call();
+        visualize(calculation);
+      }
+
+      function visualize(result) {
+        document.getElementById("calculation").textContent =
+          formatCalculation();
+
+        if (result) {
+          if (result === "reset")
+            document.getElementById("result").textContent = "";
+          else document.getElementById("result").textContent = result;
+        }
+      }
+    </script>
+
+    <div class="w-full h-screen">
+      <div class="w-full h-full flex items-center flex-col gap-4 pt-6">
+        <div>
+          <p id="calculation">0</p>
+          <p id="result"></p>
+        </div>
+
+        <div class="grid gap-4 grid-cols-4 grid-rows-5">
+          <button class="btn btn-rounded" onclick="reset()">C</button>
+          <button class="btn btn-rounded col-span-2">+ / -</button>
+          <button class="btn btn-rounded" onclick="addToString('/')">/</button>
+          <button class="btn btn-rounded" onclick="addToString('7')">7</button>
+          <button class="btn btn-rounded" onclick="addToString('8')">8</button>
+          <button class="btn btn-rounded" onclick="addToString('9')">9</button>
+          <button class="btn btn-rounded" onclick="addToString('*')">*</button>
+          <button class="btn btn-rounded" onclick="addToString('4')">4</button>
+          <button class="btn btn-rounded" onclick="addToString('5')">5</button>
+          <button class="btn btn-rounded" onclick="addToString('6')">6</button>
+          <button class="btn btn-rounded" onclick="addToString('-')">-</button>
+          <button class="btn btn-rounded" onclick="addToString('1')">1</button>
+          <button class="btn btn-rounded" onclick="addToString('2')">2</button>
+          <button class="btn btn-rounded" onclick="addToString('3')">3</button>
+          <button class="btn btn-rounded" onclick="addToString('+')">+</button>
+          <button class="btn btn-rounded col-span-2" onclick="addToString('0')">0</button>
+          <button class="btn btn-rounded" onclick="addToString(',')">.</button>
+          <button class="btn btn-rounded" onclick="calculate()">=</button>
+        </div>
+
+      </div>
+      </div>
+    </div>
+  </body>
+</html>
